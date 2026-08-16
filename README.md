@@ -14,6 +14,20 @@ This repository implements token-based authentication (JWT), complete Employee C
 
 ---
 
+## 📸 Screenshots
+
+Here are some previews of the dashboard in action. You can capture screenshots of your running app and place them in a `/screenshots` folder to display them here!
+
+| **Dashboard Analytics Overview** | **Employee Directory & CRUD** |
+| :---: | :---: |
+| ![Dashboard UI](./screenshots/dashboard.png) | ![Employee CRUD](./screenshots/employees.png) |
+
+| **Attendance Sheets Log** | **Responsive Navigation & Profile** |
+| :---: | :---: |
+| ![Attendance](./screenshots/attendance.png) | ![Profile](./screenshots/profile.png) |
+
+---
+
 ## 🏗️ Architecture Design
 
 We implement a decoupled client-server architecture to ensure high code quality, security, and separation of concerns:
@@ -110,7 +124,7 @@ Follow these steps to run both the backend server and frontend client locally.
 
 Log in using the pre-seeded admin credentials:
 - **Email**: `admin@pramyan.com`
-- **Password**: `admin123`
+- **Password**: `PramyanHRAdmin#2026`
 
 ---
 
@@ -134,3 +148,13 @@ Log in using the pre-seeded admin credentials:
 
 ### Analytics Dashboard
 - `GET /api/dashboard/stats` - Fetch total headcount, active status split, today's attendance stats, and department headcount aggregates (private).
+
+---
+
+## 📌 Assumptions & Design Choices
+
+Following the guidelines in the assignment:
+1. **Admin Credentials**: We assume a single pre-seeded administrator is sufficient for evaluating HR Admin capabilities. This user (`admin@pramyan.com`) is populated into MongoDB cloud collections during initial setup via a seeder script.
+2. **Decoupled API Server**: Since the hiring team utilizes a separate Node/Express backend and Next.js frontend day-to-day, we opted to build these layers as decoupled services communicating over HTTP/CORS instead of combining them into Next.js serverless handlers.
+3. **Daily Attendance Lock**: We assume that an employee can only have one attendance log per date. We enforced this at the database layer with a compound unique index on `{ employee, date }` in the Attendance Schema.
+

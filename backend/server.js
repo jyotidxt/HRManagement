@@ -31,11 +31,21 @@ app.use(cors({
   origin: function (origin, callback) {
     // Allow server-to-server or programmatic requests (like postman/curl)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
+    
+    const cleanOrigin = origin.replace(/\/$/, "").toLowerCase();
+    
+    const isAllowed = allowedOrigins.some(allowedOrigin => {
+      return cleanOrigin === allowedOrigin.replace(/\/$/, "").toLowerCase();
+    });
+
+    const isVercelPreview = cleanOrigin.endsWith('.vercel.app');
+
+    if (isAllowed || isVercelPreview || process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    } else {
       const msg = `CORS Policy Block: Origin ${origin} is not allowed access.`;
       return callback(new Error(msg), false);
     }
-    return callback(null, true);
   },
   credentials: true
 }));

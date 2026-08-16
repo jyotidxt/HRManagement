@@ -1,4 +1,5 @@
 import Employee from '../models/employee.js';
+import Attendance from '../models/attendance.js';
 
 // @desc    Get all employees with optional search and filter
 // @route   GET /api/employees
@@ -123,6 +124,9 @@ export const deleteEmployee = async (req, res) => {
     const employee = await Employee.findById(req.params.id);
 
     if (employee) {
+      // Cascade delete all attendance records associated with this employee
+      await Attendance.deleteMany({ employee: req.params.id });
+      
       await Employee.deleteOne({ _id: req.params.id });
       return res.json({ message: 'Employee removed successfully' });
     } else {

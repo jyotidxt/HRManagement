@@ -18,10 +18,10 @@ const seedAdmin = async () => {
     // Create admin user
     await User.create({
       email: 'admin@pramyan.com',
-      password: 'admin123' // Password will be hashed in the pre-save hook
+      password: 'PramyanHRAdmin#2026' // Changed from admin123 to prevent browser warnings
     });
 
-    console.log('Default admin seeded successfully! (admin@pramyan.com / admin123)');
+    console.log('Default admin seeded successfully! (admin@pramyan.com / PramyanHRAdmin#2026)');
     process.exit(0);
   } catch (error) {
     console.error(`Seeding error: ${error.message}`);

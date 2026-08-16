@@ -103,7 +103,7 @@ export default function LoginPage() {
         </form>
 
         <div className="mt-8 text-center text-xs text-slate-500 border-t border-slate-850 pt-4">
-          Demo Credentials: <span className="font-mono text-slate-400">admin@pramyan.com</span> / <span className="font-mono text-slate-400">admin123</span>
+          Demo Credentials: <span className="font-mono text-slate-400">admin@pramyan.com</span> / <span className="font-mono text-slate-400">PramyanHRAdmin#2026</span>
         </div>
       </div>
     </main>

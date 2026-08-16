@@ -11,7 +11,10 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+  let API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+  if (API_URL && !API_URL.endsWith('/api') && !API_URL.endsWith('/api/')) {
+    API_URL = `${API_URL.replace(/\/$/, '')}/api`;
+  }
 
   useEffect(() => {
     const checkUser = async () => {

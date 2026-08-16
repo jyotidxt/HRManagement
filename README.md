@@ -30,7 +30,7 @@ Here are some previews of the dashboard in action. You can capture screenshots o
 
 ## 🏗️ Architecture Design
 
-We implement a decoupled client-server architecture to ensure high code quality, security, and separation of concerns:
+We implement a decoupled client-server architecture to ensur run deve high code quality, security, and separation of concerns:
 
 ```
 HRManagement/

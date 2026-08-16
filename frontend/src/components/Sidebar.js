@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-import { LayoutDashboard, Users, CalendarDays, LogOut, Briefcase } from 'lucide-react';
+import { LayoutDashboard, Users, CalendarDays, LogOut, Briefcase, X } from 'lucide-react';
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
 
@@ -16,14 +16,27 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="fixed top-0 left-0 z-40 w-64 h-screen border-r border-slate-850 bg-slate-900/60 backdrop-blur-xl flex flex-col justify-between">
+    <aside className={`fixed top-0 left-0 z-40 w-64 h-screen border-r border-slate-850 bg-slate-900/95 md:bg-slate-900/60 backdrop-blur-xl flex flex-col justify-between transition-transform duration-300 ease-in-out md:translate-x-0 ${
+      isOpen ? 'translate-x-0' : '-translate-x-full'
+    }`}>
       <div>
-        {/* Brand Logo */}
-        <div className="h-16 flex items-center gap-3 px-6 border-b border-slate-850">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600/10 text-blue-500 ring-1 ring-blue-500/20">
-            <Briefcase className="h-5 w-5" />
+        {/* Brand Logo & Close Trigger */}
+        <div className="h-16 flex items-center justify-between px-6 border-b border-slate-850">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600/10 text-blue-500 ring-1 ring-blue-500/20">
+              <Briefcase className="h-5 w-5" />
+            </div>
+            <span className="text-lg font-bold text-white tracking-wider">PRAMYAN</span>
           </div>
-          <span className="text-lg font-bold text-white tracking-wider">PRAMYAN</span>
+          
+          {/* Close Sidebar Trigger on Mobile */}
+          <button
+            onClick={onClose}
+            className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white md:hidden cursor-pointer"
+            title="Close Menu"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
 
         {/* Links */}
@@ -36,6 +49,7 @@ export default function Sidebar() {
               <Link
                 key={item.name}
                 href={item.href}
+                onClick={onClose}
                 className={`flex items-center gap-3.5 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
                   isActive
                     ? 'bg-blue-600 text-white shadow-md shadow-blue-600/10'
